@@ -1,4 +1,4 @@
-[![Made with n8n](https://img.shields.io/badge/made%20with-n8n-%23c0253c)]([https://n8n.io](https://n8n.partnerlinks.io/cpqi2mcvtjxx))
+[![Made with n8n](https://img.shields.io/badge/made%20with-n8n-%23c0253c)](https://n8n.partnerlinks.io/cpqi2mcvtjxx)
 
 # macOS Clipboard Sync Agent 🚀
 
