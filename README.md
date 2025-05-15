@@ -1,3 +1,5 @@
+[![Made with n8n](https://img.shields.io/badge/made%20with-n8n-%23c0253c)](https://n8n.io)
+
 # macOS Clipboard Sync Agent 🚀
 
 A local automation system that lets you save your clipboard content into a Google Sheet with a simple keyboard shortcut on macOS.
