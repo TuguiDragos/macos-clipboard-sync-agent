@@ -1,0 +1,157 @@
+{
+  "name": "macOS Clipboard Sync Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "copy-paste",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "8d5e9f38-e4c1-4cdc-acb1-aba6244738bd",
+      "name": "Clipboard Webhook",
+      "webhookId": "21569125-f0aa-4e18-aa41-bb13452c8a9a"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a455c2e7-c4f9-4bd1-abbd-3c9f6b713567",
+              "name": "Timestamp",
+              "value": "={{ new Date().toLocaleString(\"ro-RO\", { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }) }}",
+              "type": "string"
+            },
+            {
+              "id": "2176a7e0-2f61-4ae7-8f9f-52b29e1d35f0",
+              "name": "Text",
+              "value": "={{ $json.body.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        0
+      ],
+      "id": "74fb0852-2cb7-4bd6-b4c7-26636626a072",
+      "name": "Data Formatter"
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "https://docs.google.com/",
+          "mode": "url"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{ $json.Timestamp }}",
+            "Text": "={{ $json.Text }}"
+          },
+          "matchingColumns": [
+            "Timestamp"
+          ],
+          "schema": [
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Text",
+              "displayName": "Text",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        440,
+        0
+      ],
+      "id": "f2e56b80-7d3c-45a8-841f-ecab5f00fd87",
+      "name": "Clipboard Logger Sheet",
+      "credentials": {
+        "googleApi": {
+          "id": "e9gcRrYVILRIWShY",
+          "name": "Google Service Account account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Clipboard Webhook": {
+      "main": [
+        [
+          {
+            "node": "Data Formatter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Data Formatter": {
+      "main": [
+        [
+          {
+            "node": "Clipboard Logger Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "237f855a-6699-43cc-9268-46f6dcbc1e08",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0c91cd2a3133931f13781d4dcd6db321515413596b36e6bddb494176726841a7"
+  },
+  "id": "aVHTqyPUFPTiCz9C",
+  "tags": [
+    {
+      "createdAt": "2025-05-14T18:52:56.055Z",
+      "updatedAt": "2025-05-14T18:52:56.055Z",
+      "id": "a6b41kNUtX65uzIo",
+      "name": "tuguidragos.com"
+    }
+  ]
+}
